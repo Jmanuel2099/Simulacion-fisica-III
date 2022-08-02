@@ -8,7 +8,7 @@ class refraction_reflection:
         self.__n_a = n_a
         self.__n_b = n_b
         self.__angle_a = angle_a
-        self.angle_b = self.__calculate_angle_refraction()
+        self.angle_refraction = self.__calculate_angle_refraction()
 
     def __calculate_angle_refraction(self):
         x = (self.__n_a/self.__n_b) * math.sin(self.__degrees_to_radians(self.__angle_a))

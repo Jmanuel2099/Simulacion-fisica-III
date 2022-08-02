@@ -7,7 +7,7 @@ def main():
 
 if __name__ == '__main__':
     x = refraction_reflection(1.32, 1.52, 60)
-    print(x.angle_b)
+    print(x.angle_refraction)
     # main()  
     # while True:
     #     for event in pygame.event.get():
