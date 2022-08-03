@@ -90,6 +90,9 @@ class Zone(pygame.sprite.Sprite):
 laser = Laser(0, 0, 30)
 zone_one = Zone(180, 150, 100, 100, (0, 0, 255))
 laser2 = RectLaser(0, 0, 30)
+laserFlexivo = None
+laserRefractado = None
+colision2 = None
 # colision = pygame.Rect.collidepoint(zone_one, laser.x, laser.y)
 while True:
     for event in pygame.event.get():
@@ -100,9 +103,21 @@ while True:
     zone_one
     colision = pygame.sprite.spritecollide(laser2, [zone_one], False)
 
-    print(colision)
     if colision:
-        Laser(laser2.x, laser2.y, 330).update()
+        if not colision2 and laserRefractado:
+            colision2 = pygame.sprite.spritecollide(
+                laserRefractado, [zone_one], False)
+        if not laserFlexivo:
+            laserFlexivo = RectLaser(laser2.x, laser2.y, 330)
+        if laserFlexivo:
+            laserFlexivo.update()
+        if not laserRefractado:
+            laserRefractado = RectLaser(laser2.x, laser2.y, 80)
+        if laserRefractado:
+            if colision2:
+                print("colision")
+            else:
+                laserRefractado.update()
     else:
         laser2.update()
 
