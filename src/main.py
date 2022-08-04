@@ -18,6 +18,8 @@ pygame.display.set_caption("Reflexion y refracción")  # Nombre de la ventana
 #     "assets/disparador.png").convert_alpha(), (200, 200))
 bg = pygame.transform.scale(pygame.image.load(
     "assets/laboratorio.jpg").convert_alpha(), (WIDTH, HEIGHT))
+base = pygame.transform.scale(pygame.image.load(
+    "assets/base.png").convert_alpha(), (620, 170))
 # laser = RectLaser(posX, posY+200, 90)
 materia = ZonaMateria()
 Lanzador = Lanzador()
@@ -34,16 +36,17 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-    colision = pygame.sprite.collide_rect(Lanzador.laser, materia)
+    colision = pygame.sprite.spritecollide(Lanzador, [materia], False)
     all_sprites.update()
     if colision:
         if not laserFlexivo:
             laserFlexivo = RectLaser(Lanzador.laser.x, Lanzador.laser.y, 45)
         if laserFlexivo:
-            laserFlexivo.update()
+            laserFlexivo.update(screen)
         if not laserRefractado:
             laserRefractado = RectLaser(Lanzador.laser.x, Lanzador.laser.y, 80)
     else:
         Lanzador.laser.update(screen)
     all_sprites.draw(screen)
+    screen.blit(base, (WIDTH // 2 - 310, HEIGHT - 250))
     pygame.display.update()

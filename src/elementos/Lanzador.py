@@ -33,9 +33,9 @@ class Lanzador(pygame.sprite.Sprite):
         self.rect.x += self.speed_x
         #-----------ANGLE-----------------
         if keystate[pygame.K_UP]:
-            self.speed_angle = 1
-        if keystate[pygame.K_DOWN]:
             self.speed_angle = -1
+        if keystate[pygame.K_DOWN]:
+            self.speed_angle = 1
         self.angle += self.speed_angle
         #------------Validaciones X----------------------
         if self.rect.right > WIDTH:
